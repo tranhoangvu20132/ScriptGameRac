@@ -381,7 +381,7 @@ page2_2:Toggle('Auto Stats (Devil Fruit)',false,function(value)
     DevilFruit = value
 end)
 
-page2_2:Button('Reset Stats',function()
+page2_2:Button('Reset Stats (Coming Soon)',function()
     
 end)
 
