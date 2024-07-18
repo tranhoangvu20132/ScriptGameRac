@@ -104,6 +104,7 @@ function UpdateDBEsp()
     end
 end
 
+
 function UnEquipWeapon(ToolSess)
     if game.Players.LocalPlayer.Character:FindFirstChild(ToolSess) then
         getgenv().toolun = game.Players.LocalPlayer.Character:FindFirstChild(ToolSess)
@@ -112,7 +113,7 @@ function UnEquipWeapon(ToolSess)
     end
 end
 
-_G.Color = Color3.fromRGB(11, 230, 113)
+_G.Color = Color3.fromRGB(255, 255, 0)
 _G.Logo = 15094837583
 wait(0.1)
 
@@ -259,7 +260,7 @@ function CheckQuest()
         Nume = 32
         QuestN = "Lv1900Quest"
         Num = 33
-    elseif Level == 1950 or Level <= 1999 then
+    elseif Level == 1950 or Level <= 2001 then
         Nume = 33
         QuestN = "Lv1950Quest"
         Num = 34
@@ -304,7 +305,14 @@ end)
 
 
 page2:Dropdown("Select Weapon",Weaponlist,"",function(a)
-    Weapon = a
+    Weaponlist = a
+end)
+
+page2:Button('Refresh Weapon',function()
+     for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+        table.clear(Weaponlist)
+        table.insert(Weaponlist,v.Name)
+    end
 end)
 
 
@@ -373,12 +381,16 @@ page2_2:Toggle('Auto Stats (Devil Fruit)',false,function(value)
     DevilFruit = value
 end)
 
+page2_2:Button('Reset Stats',function()
+    
+end)
+
 local page1_3 = tab3:CraftPage('Teleport (Sea 1)',1)
 
 
 page1_3:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Roshi Island","Snow Island","Pink Island","NameK Island","IDK Island","DontKnowThisIsland","Sky Island","Sky2 Island","Magma Island","Broly Island","Snuw Island","Secret House","Zamasu Island","Boss Broly Island","Sea Beast Island"},nil,function(a)
     if a == "Start Island" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(763.180908, 198.715561, 313.915527, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(288,63,115))
     elseif a == "Sand Island" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1400.95068, 107.864403, -366.769592, 0.173624337, 0, 0.984811902, 0, 1, 0, -0.984811902, 0, 0.173624337)
     elseif a == "Roshi Island" then
@@ -414,18 +426,18 @@ page1_3:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Rosh
     end
 end)
 
-page1_3:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden Sword NPC","Black Leg NPC","Speed Nimbus NPC","Random Race NPC","Dark Blade Awake NPC","Diamond Sword NPC","Flower Sword NPC","Dragon Ball NPC","Race V2 NPC","Electro NPC","Dragon Combat NPC","Dark Sword NPC","Devil Fruit NPC (Beli)","Devil Fruit NPC (Gem)","? NPC","Flame Sword NPC","Legendary Combat NPC","Awakening Fruit NPC","Mini Blade NPC","Lucky Random NPC (Ruby)"},nil,function(a)
+page1_3:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden Sword NPC","Black Leg NPC","Speed Nimbus NPC","Random Race NPC","Dark Blade Awake NPC","Diamond Sword NPC","Flower Sword NPC","Dragon Ball NPC","Reset Fruit NPC","Race V2 NPC","Electro NPC","Dragon Combat NPC","Dark Sword NPC","Devil Fruit NPC","? NPC","Flame Sword NPC","Legendary Combat NPC","Awakening Fruit NPC","Mini Blade NPC","Lucky Random NPC (Ruby)"},nil,function(a)
     if a == "Combat NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(324.491699, 95.0442429, 640.770386, -1, 0, 0, 0, 1, 0, 0, 0, -1)
     elseif a == "Dark Blade NPC" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(326.995056, 94.5463333, 700.915344, -0.998775065, 3.27190435e-08, 0.0494808927, 3.4276578e-08, 1, 3.06289571e-08, -0.0494808927, 3.2287474e-08, -0.998775065)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(323,63,103))
     elseif a == "Wooden Sword NPC" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(693.296448, 95.3060303, 358.411926, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(435,63,142))
     elseif a == "Black Leg NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1353.80566, 69.2778931, -410.218567, 0.202771068, 0, 0.979226172, 0, 1, 0, -0.979226172, 0, 0.202771068)
     elseif a == "Speed Nimbus NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-683.739441, 66.8792419, -1508.07739, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-    elseif a =="Random Race NPC" then
+    elseif a == "Random Race NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2525.24731, 83.6779327, 1329.15759, -0.999616385, -2.39192877e-06, 0.0277067125, 2.39192877e-06, 1, 0.000172627479, -0.0277067125, 0.000172627479, -0.999616385)
     elseif a =="Dark Blade Awake NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-9897.81738, 10108.9648, 159.725479, -1, 0, 0, 0, 1, 0, 0, 0, -1)
@@ -435,6 +447,8 @@ page1_3:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2753.55688, 132.597, -2810.2124, 0.870833814, 0, 0.491577566, 0, 1, 0, -0.491577566, 0, 0.870833814)
     elseif a =="Dragon Ball NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-364.716034, 208.071259, 2480.65845, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+    elseif a =="Reset Fruit NPC" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(280,81,410))
     elseif a =="Race V2 NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-215.362549, 149.672379, 2573.77271, 0, 0, 1, 0, 1, -0, -1, 0, 0)
     elseif a =="Electro NPC" then
@@ -443,8 +457,8 @@ page1_3:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1212.63647, 62.8808861, -3430.13574, 0, 0, 1, 0, 1, -0, -1, 0, 0)
     elseif a =="Dark Sword NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3978.69727, 175.450104, 55.7550926, 0.2798419, 0.774647951, 0.567105949, -0.166371077, 0.620899677, -0.766031504, -0.94552058, 0.120017737, 0.302632749)
-    elseif a =="Devil Fruit NPC (Gem)" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3520.30054, 110.198532, 1392.3158, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+    elseif a =="Devil Fruit NPC" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(345,63,180))
     elseif a =="? NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3750.03247, 89.1133957, 484.051758, 0.974033058, -0, -0.226405889, 0, 1, -0, 0.226405889, 0, 0.974033058)
     elseif a =="Flame Sword NPC" then
@@ -457,8 +471,6 @@ page1_3:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3281.55371, 69.3005295, 22.631422, -0.946952462, 1.50558872e-08, 0.321373612, -3.67973629e-09, 1, -5.76911781e-08, -0.321373612, -5.58133735e-08, -0.946952462)
     elseif a =="Lucky Random NPC (Ruby)" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3272.34326, 89.0924606, -204.238068, 0.526233375, -9.13948455e-08, -0.850340188, 2.92853137e-08, 1, -8.93571013e-08, 0.850340188, 2.21202114e-08, 0.526233375)
-    elseif a =="Devil Fruit NPC (Beli)" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(479.479065, 94.8633347, 693.720398, -0.994107902, -3.14160289e-08, 0.108395211, -2.75976735e-08, 1, 3.67263944e-08, -0.108395211, 3.35185426e-08, -0.994107902)
      end
 end)
 
@@ -472,12 +484,9 @@ page1_3:Dropdown("Select Island To Teleport",{"Start Island","Chirstmas Island",
     end
 end)
 
-page1_3:Dropdown("Select NPC To Teleport (Coming Soon)",{"Coming Soon",},nil,function(a)
-    if a == "" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(763.180908, 198.715561, 313.915527, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-    elseif a == "" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1400.95068, 107.864403, -366.769592, 0.173624337, 0, 0.984811902, 0, 1, 0, -0.984811902, 0, 0.173624337)
-    end
+page1_3:Dropdown("Select NPC To Teleport (Coming Soon)",{"",},nil,function(a)
+    
+    
 end)
 
 local page1_4 = tab4:CraftPage('Raid (Only Sea 1)',1)
