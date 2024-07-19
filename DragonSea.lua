@@ -305,7 +305,7 @@ end)
 
 
 page2:Dropdown("Select Weapon",Weaponlist,"",function(a)
-    Weaponlist = a
+    Weapon = a
 end)
 
 page2:Button('Refresh Weapon',function()
