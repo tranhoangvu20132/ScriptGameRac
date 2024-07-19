@@ -299,7 +299,7 @@ page2:Dropdown("Select Method Farm",{"Normal","Fast"},"Normal",function(a)
     Method = a
 end)
 
-page2:Slider("Distance Farm",true,0,100,1,function(value)
+page2:Slider("Distance Farm",true,0,100,9,function(value)
     DistanceMob = value
 end)
 
