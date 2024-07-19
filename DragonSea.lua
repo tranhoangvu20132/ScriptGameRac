@@ -306,6 +306,7 @@ end)
 
 page2:Dropdown("Select Weapon",Weaponlist,"",function(a)
     Weapon = a
+    RefreshWeapon = a
 end)
 
 page2:Button('Refresh Weapon',function()
@@ -662,6 +663,7 @@ spawn(function()
         end
     end
 end)
+
 
 spawn(function()
     while wait() do
