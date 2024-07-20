@@ -641,6 +641,13 @@ page1_4:Dropdown("Select Island To Teleport",{"Start Island","Chirstmas Island",
     end
 end)
 
+local page1_5 = tab4:CraftPage('Sea',2)
+
+page1_5:Button('Teleport Place Sea 2',function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(751.607421875, 65.19896697998047, 170.67616271972656)
+end)
+
+
 page1_4:Dropdown("Select NPC To Teleport (Coming Soon)",{"",},nil,function(a)
     
     
