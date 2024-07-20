@@ -212,58 +212,62 @@ function CheckQuest()
         Nume = 20
         QuestN = "Lv1100Quest"
         Num = 21
-    elseif Level == 1300 or Level <= 1399 then
+    elseif Level == 1300 or Level <= 1349 then
         Nume = 21
         QuestN = "Lv1300Quest"
         Num = 22
-    elseif Level == 1400 or Level <= 1449 then
+    elseif Level == 1350 or Level <= 1399 then
         Nume = 22
-        QuestN = "Lv1400Quest"
+        QuestN = "Lv1350Quest"
         Num = 23
-    elseif Level == 1450 or Level <= 1499 then
+    elseif Level == 1400 or Level <= 1449 then
         Nume = 23
-        QuestN = "Lv1450Quest"
+        QuestN = "Lv1400Quest"
         Num = 24
-    elseif Level == 1500 or Level <= 1549 then
+    elseif Level == 1450 or Level <= 1499 then
         Nume = 24
-        QuestN = "Lv1500Quest"
+        QuestN = "Lv1450Quest"
         Num = 25
-    elseif Level == 1550 or Level <= 1599 then
+    elseif Level == 1500 or Level <= 1549 then
         Nume = 25
-        QuestN = "Lv1550Quest"
+        QuestN = "Lv1500Quest"
         Num = 26
-    elseif Level == 1600 or Level <= 1649 then
+    elseif Level == 1550 or Level <= 1599 then
         Nume = 26
-        QuestN = "Lv1600Quest"
+        QuestN = "Lv1550Quest"
         Num = 27
-    elseif Level == 1650 or Level <= 1699 then
+    elseif Level == 1600 or Level <= 1649 then
         Nume = 27
-        QuestN = "Lv1650Quest"
+        QuestN = "Lv1600Quest"
         Num = 28
-    elseif Level == 1700 or Level <= 1749 then
+    elseif Level == 1650 or Level <= 1699 then
         Nume = 28
-        QuestN = "Lv1700Quest"
+        QuestN = "Lv1650Quest"
         Num = 29
-    elseif Level == 1750 or Level <= 1799 then
+    elseif Level == 1700 or Level <= 1749 then
         Nume = 29
-        QuestN = "Lv1750Quest"
+        QuestN = "Lv1700Quest"
         Num = 30
-    elseif Level == 1800 or Level <= 1849 then
+    elseif Level == 1750 or Level <= 1799 then
         Nume = 30
-        QuestN = "Lv1800Quest"
+        QuestN = "Lv1750Quest"
         Num = 31
-    elseif Level == 1850 or Level <= 1899 then
+    elseif Level == 1800 or Level <= 1849 then
         Nume = 31
-        QuestN = "Lv1850Quest"
+        QuestN = "Lv1800Quest"
         Num = 32
-    elseif Level == 1900 or Level <= 1949 then
+    elseif Level == 1850 or Level <= 1899 then
         Nume = 32
-        QuestN = "Lv1900Quest"
+        QuestN = "Lv1850Quest"
         Num = 33
-    elseif Level == 1950 or Level <= 2001 then
+    elseif Level == 1900 or Level <= 1949 then
         Nume = 33
-        QuestN = "Lv1950Quest"
+        QuestN = "Lv1900Quest"
         Num = 34
+    elseif Level == 1950 or Level <= 2001 then
+        Nume = 34
+        QuestN = "Lv1950Quest"
+        Num = 35
     end
 end
 CheckQuest()
@@ -273,8 +277,9 @@ local Win = library:Evil("Dragon Sea","",_G.Logo )
 local Weapon = nil
 local tab1 = Win:CraftTab('Main')
 local tab2 = Win:CraftTab('Misc')
-local tab3 = Win:CraftTab('Teleport')
-local tab4 = Win:CraftTab('Raid')
+local tab3 = Win:CraftTab('Quest')
+local tab4 = Win:CraftTab('Teleport')
+local tab5 = Win:CraftTab('Raid')
 local page1 = tab1:CraftPage('Main',1)
 
 page1:Toggle('Killaura Mob',false,function(value)
@@ -385,10 +390,162 @@ page2_2:Button('Reset Stats (Coming Soon)',function()
     
 end)
 
-local page1_3 = tab3:CraftPage('Teleport (Sea 1)',1)
+local page1_3 = tab3:CraftPage('Quest (Sea 1)',1)
+
+page1_3:Toggle('Auto Quest Level 1',false,function(value)
+    AutoQuestLevel1 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 50',false,function(value)
+    AutoQuestLevel50 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 100',false,function(value)
+    AutoQuestLevel100 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 150',false,function(value)
+    AutoQuestLevel150 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 200',false,function(value)
+    AutoQuestLevel200 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 250',false,function(value)
+    AutoQuestLevel250 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 300',false,function(value)
+    AutoQuestLevel300 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 350',false,function(value)
+    AutoQuestLevel350 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 400',false,function(value)
+    AutoQuestLevel400 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 450',false,function(value)
+    AutoQuestLevel450 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 500',false,function(value)
+    AutoQuestLevel500 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 550',false,function(value)
+    AutoQuestLevel550 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 600',false,function(value)
+    AutoQuestLevel600 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 650',false,function(value)
+    AutoQuestLevel650 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 700',false,function(value)
+    AutoQuestLevel700 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 750',false,function(value)
+    AutoQuestLevel750 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 800',false,function(value)
+    AutoQuestLevel800 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 850',false,function(value)
+    AutoQuestLevel850 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 900',false,function(value)
+    AutoQuestLevel900 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 950',false,function(value)
+    AutoQuestLevel950 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1000',false,function(value)
+    AutoQuestLevel1000 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1050',false,function(value)
+    AutoQuestLevel1050 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1100',false,function(value)
+    AutoQuestLevel1100 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1300',false,function(value)
+    AutoQuestLevel1300 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1350',false,function(value)
+    AutoQuestLevel1350 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1400',false,function(value)
+    AutoQuestLevel1400 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1450',false,function(value)
+    AutoQuestLevel1450 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1500',false,function(value)
+    AutoQuestLevel1500 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1550',false,function(value)
+    AutoQuestLevel1550 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1600',false,function(value)
+    AutoQuestLevel1600 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1650',false,function(value)
+    AutoQuestLevel1650 = value
+end)
+
+local page1_3 = tab3:CraftPage('Quest (Sea 2)',2)
+
+page1_3:Toggle('Auto Quest Level 1700',false,function(value)
+    AutoQuestLevel1700 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1750',false,function(value)
+    AutoQuestLevel1750 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1800',false,function(value)
+    AutoQuestLevel1800 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1850',false,function(value)
+    AutoQuestLevel1850 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1900',false,function(value)
+    AutoQuestLevel1900 = value
+end)
+
+page1_3:Toggle('Auto Quest Level 1950',false,function(value)
+    AutoQuestLevel1950 = value
+end)
+
+local page1_4 = tab4:CraftPage('Teleport (Sea 1)',1)
 
 
-page1_3:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Roshi Island","Snow Island","Pink Island","NameK Island","IDK Island","DontKnowThisIsland","Sky Island","Sky2 Island","Magma Island","Broly Island","Snuw Island","Secret House","Zamasu Island","Boss Broly Island","Sea Beast Island"},nil,function(a)
+page1_4:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Roshi Island","Snow Island","Pink Island","NameK Island","IDK Island","DontKnowThisIsland","Sky Island","Sky2 Island","Magma Island","Broly Island","Snuw Island","Secret House","Zamasu Island","Boss Broly Island","Sea Beast Island"},nil,function(a)
     if a == "Start Island" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(288.5455017089844, 63.84864807128906, 115.04229736328125)
     elseif a == "Sand Island" then
@@ -426,7 +583,7 @@ page1_3:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Rosh
     end
 end)
 
-page1_3:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden Sword NPC","Black Leg NPC","Speed Nimbus NPC","Random Race NPC","Dark Blade Awake NPC","Diamond Sword NPC","Flower Sword NPC","Dragon Ball NPC","Reset Fruit NPC","Race V2 NPC","Electro NPC","Dragon Combat NPC","Dark Sword NPC","Devil Fruit NPC","? NPC","Flame Sword NPC","Legendary Combat NPC","Awakening Fruit NPC","Mini Blade NPC","Lucky Random NPC (Ruby)"},nil,function(a)
+page1_4:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden Sword NPC","Black Leg NPC","Speed Nimbus NPC","Random Race NPC","Dark Blade Awake NPC","Diamond Sword NPC","Flower Sword NPC","Dragon Ball NPC","Reset Fruit NPC","Race V2 NPC","Electro NPC","Dragon Combat NPC","Dark Sword NPC","Devil Fruit NPC","? NPC","Flame Sword NPC","Legendary Combat NPC","Awakening Fruit NPC","Mini Blade NPC","Lucky Random NPC (Ruby)"},nil,function(a)
     if a == "Combat NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(324.491699, 95.0442429, 640.770386, -1, 0, 0, 0, 1, 0, 0, 0, -1)
     elseif a == "Dark Blade NPC" then
@@ -474,22 +631,22 @@ page1_3:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden
      end
 end)
 
-local page1_3 = tab3:CraftPage('Teleport (Sea 2)',2)
+local page1_4 = tab4:CraftPage('Teleport (Sea 2)',2)
 
-page1_3:Dropdown("Select Island To Teleport",{"Start Island","Chirstmas Island",},nil,function(a)
+page1_4:Dropdown("Select Island To Teleport",{"Start Island","Chirstmas Island",},nil,function(a)
     if a == "Start Island" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(Vector3.new(535,249,458))
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(535.3236694335938, 249.785888671875, 458.905517578125)
     elseif a == "Chirstmas Island" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(Vector3.new(3901,195,1838))
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(3895.69384765625, 195.41709899902344, 1836.4102783203125)
     end
 end)
 
-page1_3:Dropdown("Select NPC To Teleport (Coming Soon)",{"",},nil,function(a)
+page1_4:Dropdown("Select NPC To Teleport (Coming Soon)",{"",},nil,function(a)
     
     
 end)
 
-local page1_4 = tab4:CraftPage('Raid (Only Sea 1)',1)
+local page1_4 = tab5:CraftPage('Raid (Only Sea 1)',1)
 
 page1_4:Toggle('Killaura Raid (Stop On Wave 5)',false,function(value)
     KillauraRaid =  value
@@ -661,6 +818,387 @@ spawn(function()
             end)
         end
     end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1 then
+pcall(function()
+workspace.QuestFolder.Lv1Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel50 then
+pcall(function()
+workspace.QuestFolder.Lv150Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel100 then
+pcall(function()
+workspace.QuestFolder.Lv100Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel150 then
+pcall(function()
+workspace.QuestFolder.Lv150Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel200 then
+pcall(function()
+workspace.QuestFolder.Lv200Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel250 then
+pcall(function()
+workspace.QuestFolder.Lv250Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel300 then
+pcall(function()
+workspace.QuestFolder.Lv300Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel350 then
+pcall(function()
+workspace.QuestFolder.Lv350Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel400 then
+pcall(function()
+workspace.QuestFolder.Lv400Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel450 then
+pcall(function()
+workspace.QuestFolder.Lv450Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel500 then
+pcall(function()
+workspace.QuestFolder.Lv500Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel550 then
+pcall(function()
+workspace.QuestFolder.Lv550Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel600 then
+pcall(function()
+workspace.QuestFolder.Lv600.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel650 then
+pcall(function()
+workspace.QuestFolder.Lv650Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel700 then
+pcall(function()
+workspace.QuestFolder.Lv700Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel750 then
+pcall(function()
+workspace.QuestFolder.Lv750Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel800 then
+pcall(function()
+workspace.QuestFolder.Lv800Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel850 then
+pcall(function()
+workspace.QuestFolder.Lv850Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel900 then
+pcall(function()
+workspace.QuestFolder.Lv900Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel950 then
+pcall(function()
+workspace.QuestFolder.Lv950Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1000 then
+pcall(function()
+workspace.QuestFolder.Lv1000Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1050 then
+pcall(function()
+workspace.QuestFolder.Lv1050Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1100 then
+pcall(function()
+workspace.QuestFolder.Lv1100Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1300 then
+pcall(function()
+workspace.QuestFolder.Lv1300Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1350 then
+pcall(function()
+workspace.QuestFolder.Lv1350Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1400 then
+pcall(function()
+workspace.QuestFolder.Lv1400Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1450 then
+pcall(function()
+workspace.QuestFolder.Lv1450Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1500 then
+pcall(function()
+workspace.QuestFolder.Lv1500Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1550 then
+pcall(function()
+workspace.QuestFolder.Lv1550Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1600 then
+pcall(function()
+workspace.QuestFolder.Lv1600Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1650 then
+pcall(function()
+workspace.QuestFolder.Lv1650Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1700 then
+pcall(function()
+workspace.QuestFolder.Lv1700Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1750 then
+pcall(function()
+workspace.QuestFolder.Lv1750Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1800 then
+pcall(function()
+workspace.QuestFolder.Lv1800Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1850 then
+pcall(function()
+workspace.QuestFolder.Lv1850Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1900 then
+pcall(function()
+workspace.QuestFolder.Lv1900Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
+end)
+
+spawn(function()
+while wait(0.1) do
+if AutoQuestLevel1950 then
+pcall(function()
+workspace.QuestFolder.Lv1950Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+end)
+end
+end
 end)
 
 
