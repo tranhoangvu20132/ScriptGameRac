@@ -113,7 +113,7 @@ function UnEquipWeapon(ToolSess)
     end
 end
 
-_G.Color = Color3.fromRGB(255, 255, 0)
+_G.Color = Color3.fromRGB(255,0,0)
 _G.Logo = 15094837583
 wait(0.1)
 
@@ -266,7 +266,6 @@ function CheckQuest()
         Num = 34
     elseif Level == 1950 or Level <= 2001 then
         Nume = 34
-        Mob = "Perfect Cell [Lv.1950]"
         QuestN = "Lv1950Quest"
         Num = 35
     end
@@ -274,7 +273,12 @@ end
 CheckQuest()
 
 local Evil = loadstring(game:HttpGet("https://raw.githubusercontent.com/x2duck/gui-/main/sillyhubfreegui.lua"))()
-local Win = library:Evil("Dragon Sea","",_G.Logo )
+local Win = library:Evil("DS","Hub",_G.Logo )
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:wait()
+local Humanoid = Character:WaitForChild("Humanoid")
 local Weapon = nil
 local tab1 = Win:CraftTab('Main')
 local tab2 = Win:CraftTab('Misc')
@@ -365,7 +369,7 @@ end)
 page1_2:Button('FlyGui',function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Reiji0001/Fly-Gui/main/Fly-Gui_Source"))()
 end)
-page1_2:Button('Low Mode',function()
+page1_2:Button('Super Low Mode',function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/crystalnerd/ScriptLinhTinh/main/AntiLag2"))()
 end)
 
@@ -387,10 +391,6 @@ end)
 
 page2_2:Toggle('Auto Stats (Devil Fruit)',false,function(value)
     DevilFruit = value
-end)
-
-page2_2:Button('Reset Stats',function()
-    game:GetService("Players"):GetService("Player").PlayerGui.MainGUI.Stats2.ResetStats.Click.Fire:FireServer()
 end)
 
 local page1_3 = tab3:CraftPage('Quest (Sea 1)',1)
@@ -662,11 +662,11 @@ end)
 
 local page1_4 = tab5:CraftPage('Raid (Only Sea 1)',1)
 
-page1_4:Toggle('Killaura Raid (Stop On Wave 5)',false,function(value)
+page1_4:Toggle('Killaura Raid (Stop Wave 5)',false,function(value)
     KillauraRaid =  value
 end)
 
-page1_4:Toggle('Auto Boss Raid (Use Fly)',false,function(value)
+page1_4:Toggle('Auto Raid',false,function(value)
     CC = value
 end)
 
@@ -825,17 +825,14 @@ end)
 spawn(function()
     while wait() do
         if CC then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-68.81217956542969, 138.3164520263672, 40.44826889038086)
             pcall(function()
                 spawn(function()
-                    game:GetService("RunService").Heartbeat:Connect(function()
+                game:GetService("RunService").Heartbeat:Connect(function()
                         if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-68.81217956542969, 138.3164520263672, 40.44826889038086)
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
                             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
-                            game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
-                            EquipWeapon(ToolSe)
-                            else
-                            UnEquipWeapon(ToolSess)
+                            game:GetService("Players").LocalPlayer.Character.Humanoid:SetStateEnabled(11)
                         end
                     end)
                 end)
@@ -1168,7 +1165,7 @@ spawn(function()
 while wait(0.1) do
 if AutoQuestLevel1700 then
 pcall(function()
-workspace.QuestFolder.Lv1700Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+workspace.QuestFolder.Lv1700Quest.ClickPart.QuestTake.QuestTake.Frame.Accept.RemoteEvent:FireServer()
 end)
 end
 end
@@ -1178,7 +1175,7 @@ spawn(function()
 while wait(0.1) do
 if AutoQuestLevel1750 then
 pcall(function()
-workspace.QuestFolder.Lv1750Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+workspace.QuestFolder.Lv1750Quest.ClickPart.QuestTake.QuestTake.Frame.Accept.RemoteEvent:FireServer()
 end)
 end
 end
@@ -1188,7 +1185,7 @@ spawn(function()
 while wait(0.1) do
 if AutoQuestLevel1800 then
 pcall(function()
-workspace.QuestFolder.Lv1800Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+workspace.QuestFolder.Lv1800Quest.ClickPart.QuestTake.QuestTake.Frame.Accept.RemoteEvent:FireServer()
 end)
 end
 end
@@ -1199,7 +1196,7 @@ spawn(function()
 while wait(0.1) do
 if AutoQuestLevel1850 then
 pcall(function()
-workspace.QuestFolder.Lv1850Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+workspace.QuestFolder.Lv1850Quest.ClickPart.QuestTake.QuestTake.Frame.Accept.RemoteEvent:FireServer()
 end)
 end
 end
@@ -1209,7 +1206,7 @@ spawn(function()
 while wait(0.1) do
 if AutoQuestLevel1900 then
 pcall(function()
-workspace.QuestFolder.Lv1900Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+workspace.QuestFolder.Lv1900Quest.ClickPart.QuestTake.QuestTake.Frame.Accept.RemoteEvent:FireServer()
 end)
 end
 end
