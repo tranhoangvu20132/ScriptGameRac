@@ -266,6 +266,7 @@ function CheckQuest()
         Num = 34
     elseif Level == 1950 or Level <= 2001 then
         Nume = 34
+        Mob = "Perfect Cell [Lv.1950]"
         QuestN = "Lv1950Quest"
         Num = 35
     end
@@ -370,6 +371,8 @@ end)
 
 local page2_2 = tab2:CraftPage('Stats',2)
 
+page2_2:Label('Tips: Max Level Stats Is 2000')
+
 page2_2:Toggle('Auto Stats (Melee)',false,function(value)
     Melee = value
 end)
@@ -386,8 +389,8 @@ page2_2:Toggle('Auto Stats (Devil Fruit)',false,function(value)
     DevilFruit = value
 end)
 
-page2_2:Button('Reset Stats (Coming Soon)',function()
-    
+page2_2:Button('Reset Stats',function()
+    game:GetService("Players"):GetService("Player").PlayerGui.MainGUI.Stats2.ResetStats.Click.Fire:FireServer()
 end)
 
 local page1_3 = tab3:CraftPage('Quest (Sea 1)',1)
@@ -545,7 +548,7 @@ end)
 local page1_4 = tab4:CraftPage('Teleport (Sea 1)',1)
 
 
-page1_4:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Roshi Island","Snow Island","Pink Island","NameK Island","IDK Island","DontKnowThisIsland","Sky Island","Sky2 Island","Magma Island","Broly Island","Snuw Island","Secret House","Zamasu Island","Boss Broly Island","Sea Beast Island"},nil,function(a)
+page1_4:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Roshi Island","Snow Island","Pink Island","NameK Island","IDK Island","DontKnowThisIsland","Sky Island","Sky2 Island","Magma Island","Broly Island","Snuw Island","Secret House","Zamasu Island","Boss Broly Island","Sea Beast Island","3 Sword Island"},nil,function(a)
     if a == "Start Island" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(288.5455017089844, 63.84864807128906, 115.04229736328125)
     elseif a == "Sand Island" then
@@ -580,10 +583,12 @@ page1_4:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Rosh
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5945.77246, 86.3899689, 3287.37573, 0.0122147491, -6.73873046e-08, 0.999925375, -7.53682343e-08, 1, 6.83130068e-08, -0.999925375, -7.61970398e-08, 0.0122147491)
     elseif a =="Sea Beast Island" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2290.80273, 83.3219299, 1260.94067, -0.0748878866, 3.82371255e-08, -0.997191966, 3.24806386e-08, 1, 3.59055434e-08, 0.997191966, -2.97005407e-08, -0.0748878866)
+    elseif a =="3 Sword Island" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-952.4598999023438, 74.61917114257812, -3595.201904296875)
     end
 end)
 
-page1_4:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden Sword NPC","Black Leg NPC","Speed Nimbus NPC","Random Race NPC","Dark Blade Awake NPC","Diamond Sword NPC","Flower Sword NPC","Dragon Ball NPC","Reset Fruit NPC","Race V2 NPC","Electro NPC","Dragon Combat NPC","Dark Sword NPC","Devil Fruit NPC","? NPC","Flame Sword NPC","Legendary Combat NPC","Awakening Fruit NPC","Mini Blade NPC","Lucky Random NPC (Ruby)"},nil,function(a)
+page1_4:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden Sword NPC","Black Leg NPC","Speed Nimbus NPC","Random Race NPC","Dark Blade Awake NPC","Diamond Sword NPC","Flower Sword NPC","Soul Scythe Sword Npc","Dragon Ball NPC","Reset Fruit NPC","Race V2 NPC","Electro NPC","Dragon Combat NPC","Dark Sword NPC","Devil Fruit NPC","? NPC","Flame Sword NPC","Legendary Combat NPC","Awakening Fruit NPC","Mini Blade NPC","Lucky Random NPC (Ruby)"},nil,function(a)
     if a == "Combat NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(324.491699, 95.0442429, 640.770386, -1, 0, 0, 0, 1, 0, 0, 0, -1)
     elseif a == "Dark Blade NPC" then
@@ -628,7 +633,9 @@ page1_4:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3281.55371, 69.3005295, 22.631422, -0.946952462, 1.50558872e-08, 0.321373612, -3.67973629e-09, 1, -5.76911781e-08, -0.321373612, -5.58133735e-08, -0.946952462)
     elseif a =="Lucky Random NPC (Ruby)" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3272.34326, 89.0924606, -204.238068, 0.526233375, -9.13948455e-08, -0.850340188, 2.92853137e-08, 1, -8.93571013e-08, 0.850340188, 2.21202114e-08, 0.526233375)
-     end
+    elseif a =="Soul Scythe Sword Npc" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3673.686767578125, 80.19754791259766, 1334.6556396484375)
+    end
 end)
 
 local page1_4 = tab4:CraftPage('Teleport (Sea 2)',2)
@@ -641,7 +648,7 @@ page1_4:Dropdown("Select Island To Teleport",{"Start Island","Chirstmas Island",
     end
 end)
 
-local page1_5 = tab4:CraftPage('Sea',2)
+local page1_5 = tab4:CraftPage('Sea',1)
 
 page1_5:Button('Teleport Place Sea 2',function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(751.607421875, 65.19896697998047, 170.67616271972656)
@@ -697,9 +704,9 @@ spawn(function()
                         end
                     end
                     if game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestTake") then
-                        local Event = game:GetService("Players").LocalPlayer.PlayerGui.QuestTake.Accept.RemoteEvent
-                        Event:FireServer()
-                    end 
+                    local Event = game:GetService("Players").LocalPlayer.PlayerGui.QuestTake.Accept.RemoteEvent:FireServer()
+                    Event:FireServer()
+                end 
                 elseif game:GetService("Players").LocalPlayer.Quest.Num.Value == Num then
                     CheckQuest()
                     spawn(function()
@@ -719,7 +726,7 @@ spawn(function()
                                             else
                                                 Click()   
                                             end
-                                            TP(x.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob))
+                                            TP(x.HumanoidRootPart.CFrame * CFrame.new(0,9 ,DistanceMob))
                                         until x:FindFirstChild("Humanoid").Health <= 0 or not Farm or not x.Parent or game:GetService("Players").LocalPlayer.Quest.Num.Value == 0
                                     end
                                 else
@@ -732,9 +739,9 @@ spawn(function()
                                                 elseif Method == "Fast" then
                                                     Fast = true
                                                 else
-                                                    Click()   
+                                                    Click()
                                                 end
-                                                TP(x.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob))
+                                                TP(x.HumanoidRootPart.CFrame * CFrame.new(0,9,DistanceMob))
                                             until x:FindFirstChild("Humanoid").Health <= 0 or not Farm or not x.Parent or game:GetService("Players").LocalPlayer.Quest.Num.Value == 0
                                         end
                                     end
@@ -749,9 +756,9 @@ spawn(function()
                                             elseif Method == "Fast" then
                                                 Fast = true
                                             else
-                                                Click()   
+                                                Click()  
                                             end
-                                            TP(x.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob))
+                                            TP(x.HumanoidRootPart.CFrame * CFrame.new(0,9,DistanceMob))
                                         until x:FindFirstChild("Humanoid").Health <= 0 or not Farm or not x.Parent or game:GetService("Players").LocalPlayer.Quest.Num.Value == 0
                                     end
                                 end
@@ -769,7 +776,7 @@ spawn(function()
 
                     if game:GetService("Players").LocalPlayer.Quest.Num.Value ~= Num then
                         if game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestBar") then
-                            local Event = game:GetService("Players").LocalPlayer.PlayerGui.QuestBar.Background.Cancle.RemoteEvent
+                            local Event = game:GetService("Players").LocalPlayer.PlayerGui.QuestBar.Background.Cancle.RemoteEvent:FireServer()
                             Event:FireServer()
                         end
                     end
@@ -789,7 +796,7 @@ spawn(function()
     end
 end)
 spawn(function()
-    while wait(0.01) do
+    while wait() do
         if CBLRaid or Fast then
             pcall(function()
                 local args = {
@@ -800,11 +807,18 @@ spawn(function()
                     game:GetService("Players").LocalPlayer.Character[Vtool].HackerSo1TheGioi.RemoteEvent:FireServer(unpack(args))
                 elseif game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("Attack") then
                     game:GetService("Players").LocalPlayer.Character[Vtool].Attack.RemoteEvent:FireServer(unpack(args))
+                elseif game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("UaAloLaSaoZ") then
+                    game:GetService("Players").LocalPlayer.Character[Vtool].UaAloLaSaoZ.RemoteEvent:FireServer(unpack(args))
+                elseif game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("DungCoHackNua") then
+                    game:GetService("Players").LocalPlayer.Character[Vtool].DungCoHackNua.RemoteEvent:FireServer(unpack(args))
+                elseif game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("XaiLaBiBanAcc") then
+                    game:GetService("Players").LocalPlayer.Character[Vtool].XaiLaBiBanAcc.RemoteEvent:FireServer(unpack(args))
                 end
             end) 
         end
     end
 end)
+
 
 
 
@@ -819,6 +833,9 @@ spawn(function()
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
                             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
                             game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+                            EquipWeapon(ToolSe)
+                            else
+                            UnEquipWeapon(ToolSess)
                         end
                     end)
                 end)
@@ -1202,7 +1219,7 @@ spawn(function()
 while wait(0.1) do
 if AutoQuestLevel1950 then
 pcall(function()
-workspace.QuestFolder.Lv1950Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
+workspace.QuestFolder.Lv1950Quest.ClickPart.QuestTake.QuestTake.Frame.Accept.RemoteEvent:FireServer()
 end)
 end
 end
@@ -1312,7 +1329,7 @@ end)
 
 game.Players.LocalPlayer.Character.ChildAdded:Connect(function(tools)
     if tools:IsA("Tool") then
-        if tools:FindFirstChild("HackerSo1TheGioi") or tools:FindFirstChild("Attack") or tools:FindFirstChild("HackerDepTreai") then 
+        if tools:FindFirstChild("HackerSo1TheGioi") or tools:FindFirstChild("Attack") or tools:FindFirstChild("UaAloLaSaoZ") or tools:FindFirstChild("DungCoHackNua") or tools:FindFirstChild("XaiLaBiBanAcc") then 
             Vtool = tools.Name
         end
     end
