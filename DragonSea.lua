@@ -660,7 +660,7 @@ page1_4:Dropdown("Select NPC To Teleport (Coming Soon)",{"",},nil,function(a)
     
 end)
 
-local page1_4 = tab5:CraftPage('Raid (Only Sea 1)',1)
+local page1_4 = tab5:CraftPage('Raid (Sea 1)',1)
 
 page1_4:Toggle('Killaura Raid (Stop Wave 5)',false,function(value)
     KillauraRaid =  value
