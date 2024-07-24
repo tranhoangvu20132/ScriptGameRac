@@ -1,4 +1,29 @@
-repeat wait() until game:IsLoaded()
+
+
+	-- Locals
+local Events = game:GetService("ReplicatedStorage"):WaitForChild("Events")
+local namecall
+local ScriptLoaded = false
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:wait()
+local Humanoid = Character:WaitForChild("Humanoid")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Lighting = game:GetService("Lighting")
+local OriginalWalkspeed = LocalPlayer.Character.Humanoid.WalkSpeed
+local OriginalJumpPower = LocalPlayer.Character.Humanoid.JumpPower
+local ModifiedWalkspeed = 50
+local ModifiedJumpPower = 100
+
+local function Noclip(State)
+		LocalPlayer.Character.HumanoidRootPart.CanCollide = State
+		for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+			if v:IsA("MeshPart") then
+				v.CanCollide = State
+			end
+		end
+	end
 
 function TP(pos)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
@@ -16,7 +41,6 @@ function EquipWeapon(ToolSe)
         game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
     end
 end
-
 
 _G.ColorESP = Color3.new(0,255,255)
 
@@ -272,78 +296,189 @@ function CheckQuest()
 end
 CheckQuest()
 
-local Evil = loadstring(game:HttpGet("https://raw.githubusercontent.com/x2duck/gui-/main/sillyhubfreegui.lua"))()
-local Win = library:Evil("DS","Hub",_G.Logo )
-local UserInputService = game:GetService("UserInputService")
-local Players = game:GetService("Players")
-local Player = game.Players.LocalPlayer
-local Character = Player.Character or Player.CharacterAdded:wait()
-local Humanoid = Character:WaitForChild("Humanoid")
-local Weapon = nil
-local tab1 = Win:CraftTab('Main')
-local tab2 = Win:CraftTab('Misc')
-local tab3 = Win:CraftTab('Quest')
-local tab4 = Win:CraftTab('Teleport')
-local tab5 = Win:CraftTab('Raid')
-local page1 = tab1:CraftPage('Main',1)
+local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source.lua'))()
+local Window = ArrayField:CreateWindow({
+   Name = "Dragon Sea",
+   LoadingTitle = "Dragon Sea",
+   LoadingSubtitle = "by tranhoangvu2013",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "ArrayField"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided",
+      FileName = "Key", -- It is recommended to use something unique as other scripts using ArrayField may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like ArrayField to get the key from
+      Actions = {
+            [1] = {
+                Text = 'Click here to copy the key link <--',
+                OnPress = function()
+                    print('Pressed')
+                end,
+                }
+            },
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
 
-page1:Toggle('Killaura Mob',false,function(value)
-    Killaura =  value
-end)
-
-page1:Toggle('Auto Farm Level',false,function(value)
-    Farm = value
-end)
-
-page1:Toggle('Fast Attack',false,function(value)
-    CBLRaid = value
-end)
-
-local page2 = tab1:CraftPage('Config',2)
-
-page2:Toggle('Dupe Farm',false,function(value)
-    Dupe = value
-end)
-
-page2:Dropdown("Select Method Farm",{"Normal","Fast"},"Normal",function(a)
-    Method = a
-end)
-
-page2:Slider("Distance Farm",true,0,100,1,function(value)
-    DistanceMob = value
-end)
-
-
-page2:Dropdown("Select Weapon",Weaponlist,"",function(a)
-    Weapon = a
-end)
-
-page2:Button('Refresh Weapon',function()
-     for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-        table.clear(Weaponlist)
-        table.insert(Weaponlist,v.Name)
-    end
-end)
+ArrayField:Notify({
+   Title = "Script",
+   Content = "The Script Has Been Load Succesfully",
+   Duration = 6.5,
+   Image = 7040391851,
+   Actions = { -- Notification Buttons
+      Ignore = {
+         Name = "Ok",
+         Callback = function()
+         
+      end
+   },
+ },
+})
 
 
-local page1_2 = tab2:CraftPage('Misc',1)
 
-page1_2:Toggle('Esp Fruit',false,function(va)
-    DevilFruitESP = va
+
+local Tab = Window:CreateTab("Main", 7040391851) -- Title, Image
+
+local Section = Tab:CreateSection("Main")
+
+local Toggle = Tab:CreateToggle({
+   Name = "Killaura Mob",
+   CurrentValue = false,
+   Flag = "KillauraMob", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   Killaura = value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Farm Level",
+   CurrentValue = false,
+   Flag = "AutoFarmLevel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   Farm = value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Fast Attack",
+   CurrentValue = false,
+   Flag = "FastAttack", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   CBLRaid = value
+   end,
+})
+
+local Section = Tab:CreateSection("Config")
+
+local Toggle = Tab:CreateToggle({
+   Name = "Dupe Farm",
+   CurrentValue = false,
+   Flag = "DupeFarm", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   Dupe = value
+   end,
+})
+
+local Dropdown = Tab:CreateDropdown({
+   Name = "Select Method Farm",
+   Options = {"Normal","Fast"},
+   CurrentOption = {"Normal"},
+   MultipleOptions = false,
+   Flag = "SelectMethodFarm", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   Method = value
+   end,
+})
+
+local Slider = Tab:CreateSlider({
+   Name = "Distance Farm",
+   Range = {0, 100},
+   Increment = 1,
+   Suffix = "Distance",
+   CurrentValue = 1,
+   Flag = "DistanceFarm", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   DistanceMob = value
+   end,
+})
+
+local Dropdown = Tab:CreateDropdown({
+   Name = "Select Weapon",
+   Options = Weaponlist,
+   CurrentOption = {""},
+   MultipleOptions = false,
+   Flag = "SelectWeapon", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   Weapon = value
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Refresh Weapon",
+   Callback = function()
+   table.clear(Weaponlist)
+   for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+   if v:IsA("Tool") then
+   table.insert(Weaponlist,v.Name)
+   end
+   end
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Equip Weapon",
+   CurrentValue = false,
+   Flag = "AutoEquipWeapon", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   AutoEquipWeapon = value
+   end,
+})
+
+local Tab = Window:CreateTab("Misc", 9613645002) -- Title, Image
+
+local Section = Tab:CreateSection("Misc")
+
+local Toggle = Tab:CreateToggle({
+   Name = "Esp Fruit",
+   CurrentValue = false,
+   Flag = "EspFruit", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   DevilFruitESP = value
     while DevilFruitESP do wait()
-        UpdateBfEsp() 
-    end
-end)
+        UpdateBfEsp()
+    end 
+   end,
+})
 
-page1_2:Toggle('Esp Dragon Ball',false,function(va)
-    DragonBallESP = va
+local Toggle = Tab:CreateToggle({
+   Name = "Esp Dragon Ball",
+   CurrentValue = false,
+   Flag = "EspDragonBall", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   DragonBallESP = va
     while DragonBallESP do wait()
         UpdateDBEsp() 
     end
-end)
+   end,
+})
 
-page1_2:Button('Grab Fruit',function()
-    pcall(function()
+
+local Button = Tab:CreateButton({
+   Name = "Grab Fruit",
+   Callback = function()
+   pcall(function()
         for _,v in pairs(game.workspace:GetChildren()) do
             if string.find(v.Name,"Fruit") then
                 if v:IsA("Tool") then
@@ -352,10 +487,13 @@ page1_2:Button('Grab Fruit',function()
             end
         end
     end)
-end)
+   end,
+})
 
-page1_2:Button('Grab Dragon Ball',function()
-    pcall(function()
+local Button = Tab:CreateButton({
+   Name = "Grab Dragon Ball",
+   Callback = function()
+   pcall(function()
         for _,v in pairs(game.workspace:GetChildren()) do
             if string.find(v.Name,"DB1") or string.find(v.Name, "DB2") or string.find(v.Name, "DB3") or string.find(v.Name, "DB4") or string.find(v.Name, "DB5") or string.find(v.Name, "DB6") or string.find(v.Name, "DB7") then
                 if v:IsA("Tool") then
@@ -364,191 +502,514 @@ page1_2:Button('Grab Dragon Ball',function()
             end
         end
     end)
-end)
+   end,
+})
 
-page1_2:Button('FlyGui',function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Reiji0001/Fly-Gui/main/Fly-Gui_Source"))()
-end)
-page1_2:Button('Super Low Mode',function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/crystalnerd/ScriptLinhTinh/main/AntiLag2"))()
-end)
+local Button = Tab:CreateButton({
+   Name = "FlyGui",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Reiji0001/Fly-Gui/main/Fly-Gui_Source"))()
+   end,
+})
 
-local page2_2 = tab2:CraftPage('Stats',2)
+local Button = Tab:CreateButton({
+   Name = "Super Low Mode",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/crystalnerd/ScriptLinhTinh/main/AntiLag2"))()
+   end,
+})
 
-page2_2:Label('Tips: Max Level Stats Is 2000')
+local Section = Tab:CreateSection("Stats")
 
-page2_2:Toggle('Auto Stats (Melee)',false,function(value)
-    Melee = value
-end)
+local Label = Tab:CreateLabel("Tips: Max Level Stats Is 2000")
 
-page2_2:Toggle('Auto Stats (Defense)',false,function(value)
-    Defense = value
-end)
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Stats (Melee)",
+   CurrentValue = false,
+   Flag = "AutoStatsMelee", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   Melee = value
+   end,
+})
 
-page2_2:Toggle('Auto Stats (Sword)',false,function(value)
-    Sword = value
-end)
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Stats (Defense)",
+   CurrentValue = false,
+   Flag = "AutoStatsDefense", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   Defense = value
+   end,
+})
 
-page2_2:Toggle('Auto Stats (Devil Fruit)',false,function(value)
-    DevilFruit = value
-end)
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Stats (Sword)",
+   CurrentValue = false,
+   Flag = "AutoStatsSword", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   Sword = value
+   end,
+})
 
-local page1_3 = tab3:CraftPage('Quest (Sea 1)',1)
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Stats (Devil Fruit)",
+   CurrentValue = false,
+   Flag = "AutoStatsDevilFruit", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   DevilFruit = value
+   end,
+})
 
-page1_3:Toggle('Auto Quest Level 1',false,function(value)
-    AutoQuestLevel1 = value
-end)
+local Button = Tab:CreateButton({
+   Name = "Reset Stats",
+   Callback = function()
+   game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Stats2.ResetStats.Click.Fire:FireServer()
+   end,
+})
 
-page1_3:Toggle('Auto Quest Level 50',false,function(value)
-    AutoQuestLevel50 = value
-end)
+local Tab = Window:CreateTab("Player", 11447069304) -- Title, Image
 
-page1_3:Toggle('Auto Quest Level 100',false,function(value)
-    AutoQuestLevel100 = value
-end)
+local Section = Tab:CreateSection("Player")
 
-page1_3:Toggle('Auto Quest Level 150',false,function(value)
-    AutoQuestLevel150 = value
-end)
+local Slider = Tab:CreateSlider({
+   Name = "Walk Speed",
+   Range = {0, 500},
+   Increment = 15,
+   Suffix = "Speed",
+   CurrentValue = 15,
+   Flag = "WalkSpeed", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   ModifiedWalkspeed = Value
+   end,
+})
 
-page1_3:Toggle('Auto Quest Level 200',false,function(value)
-    AutoQuestLevel200 = value
-end)
+local Slider = Tab:CreateSlider({
+   Name = "Jump Power",
+   Range = {0, 500},
+   Increment = 100,
+   Suffix = "Jump",
+   CurrentValue = 100,
+   Flag = "JumpPower", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   ModifiedJumpPower = Value
+   end,
+})
 
-page1_3:Toggle('Auto Quest Level 250',false,function(value)
-    AutoQuestLevel250 = value
-end)
+local Toggle = Tab:CreateToggle({
+   Name = "Enable Walk Speed",
+   CurrentValue = false,
+   Flag = "EnableWalkSpeed", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   if Value == true then
+				OriginalWalkspeed = LocalPlayer.Character.Humanoid.WalkSpeed
+				LocalPlayer.Character.Humanoid.WalkSpeed = ModifiedWalkspeed
+			else
+				LocalPlayer.Character.Humanoid.WalkSpeed = OriginalWalkspeed
+			end
+   end,
+})
 
-page1_3:Toggle('Auto Quest Level 300',false,function(value)
-    AutoQuestLevel300 = value
-end)
+local Toggle = Tab:CreateToggle({
+   Name = "Enable Jump Power",
+   CurrentValue = false,
+   Flag = "EnableJumpPower", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   if Value == true then
+				OriginalJumpPower = LocalPlayer.Character.Humanoid.JumpPower
+				LocalPlayer.Character.Humanoid.JumpPower = ModifiedJumpPower
+				LocalPlayer.Character.Humanoid.UseJumpPower = Value
+			else
+				LocalPlayer.Character.Humanoid.JumpPower = OriginalJumpPower
+			end
+   end,
+})
 
-page1_3:Toggle('Auto Quest Level 350',false,function(value)
-    AutoQuestLevel350 = value
-end)
+local Toggle = Tab:CreateToggle({
+   Name = "Noclip",
+   CurrentValue = false,
+   Flag = "NoClip", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   getgenv().Noclipping = Value
+			if Noclipping == true then
+				spawn(function()
+					while Noclipping == true do
+						Noclip(false)
+						task.wait()
+					end
+				end)
+			end
+			if Noclipping == false then
+				Noclip(true)
+			end
+   end,
+})
 
-page1_3:Toggle('Auto Quest Level 400',false,function(value)
-    AutoQuestLevel400 = value
-end)
+local Button = Tab:CreateButton({
+   Name = "Anti AFK",
+   Callback = function()
+   local VirtualUser = game:GetService("VirtualUser")
+    local character = game.Players.LocalPlayer.Character
 
-page1_3:Toggle('Auto Quest Level 450',false,function(value)
-    AutoQuestLevel450 = value
-end)
+    game.Players.LocalPlayer.Idled:Connect(function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+   end,
+})
 
-page1_3:Toggle('Auto Quest Level 500',false,function(value)
-    AutoQuestLevel500 = value
-end)
+local Tab = Window:CreateTab("Quest (Sea 1)", 11446859498) -- Title, Image
 
-page1_3:Toggle('Auto Quest Level 550',false,function(value)
-    AutoQuestLevel550 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 600',false,function(value)
-    AutoQuestLevel600 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 650',false,function(value)
-    AutoQuestLevel650 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 700',false,function(value)
-    AutoQuestLevel700 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 750',false,function(value)
-    AutoQuestLevel750 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 800',false,function(value)
-    AutoQuestLevel800 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 850',false,function(value)
-    AutoQuestLevel850 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 900',false,function(value)
-    AutoQuestLevel900 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 950',false,function(value)
-    AutoQuestLevel950 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1000',false,function(value)
-    AutoQuestLevel1000 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1050',false,function(value)
-    AutoQuestLevel1050 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1100',false,function(value)
-    AutoQuestLevel1100 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1300',false,function(value)
-    AutoQuestLevel1300 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1350',false,function(value)
-    AutoQuestLevel1350 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1400',false,function(value)
-    AutoQuestLevel1400 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1450',false,function(value)
-    AutoQuestLevel1450 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1500',false,function(value)
-    AutoQuestLevel1500 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1550',false,function(value)
-    AutoQuestLevel1550 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1600',false,function(value)
-    AutoQuestLevel1600 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1650',false,function(value)
-    AutoQuestLevel1650 = value
-end)
-
-local page1_3 = tab3:CraftPage('Quest (Sea 2)',2)
-
-page1_3:Toggle('Auto Quest Level 1700',false,function(value)
-    AutoQuestLevel1700 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1750',false,function(value)
-    AutoQuestLevel1750 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1800',false,function(value)
-    AutoQuestLevel1800 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1850',false,function(value)
-    AutoQuestLevel1850 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1900',false,function(value)
-    AutoQuestLevel1900 = value
-end)
-
-page1_3:Toggle('Auto Quest Level 1950',false,function(value)
-    AutoQuestLevel1950 = value
-end)
-
-local page1_4 = tab4:CraftPage('Teleport (Sea 1)',1)
+local Section = Tab:CreateSection("Quest (Sea 1)")
 
 
-page1_4:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Roshi Island","Snow Island","Pink Island","NameK Island","IDK Island","DontKnowThisIsland","Sky Island","Sky2 Island","Magma Island","Broly Island","Snuw Island","Secret House","Zamasu Island","Boss Broly Island","Sea Beast Island","3 Sword Island"},nil,function(a)
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1",
+   CurrentValue = false,
+   Flag = "AutoQuestLv1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 50",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel50", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 100",
+   CurrentValue = false,
+   Flag = "AutoQuestLv100", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel100 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 150",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel150", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel150 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 200",
+   CurrentValue = false,
+   Flag = "AutoQuestLv200", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel200 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 250",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel250", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel250 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 300",
+   CurrentValue = false,
+   Flag = "AutoQuestLv300", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel300 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 350",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel350", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel350 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 400",
+   CurrentValue = false,
+   Flag = "AutoQuestLv400", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel400 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 450",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel450", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 500",
+   CurrentValue = false,
+   Flag = "AutoQuestLv500", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel500 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 550",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel550", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel550 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 600",
+   CurrentValue = false,
+   Flag = "AutoQuestLv600", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel600 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 650",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel650", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel650 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 700",
+   CurrentValue = false,
+   Flag = "AutoQuestLv700", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel700 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 750",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel750", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel750 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 800",
+   CurrentValue = false,
+   Flag = "AutoQuestLv800", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel800 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 850",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel850", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel850 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 900",
+   CurrentValue = false,
+   Flag = "AutoQuestLv900", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel900 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 950",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel950", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel950 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1000",
+   CurrentValue = false,
+   Flag = "AutoQuestLv1000", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1000 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1050",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1050", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1050 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1100",
+   CurrentValue = false,
+   Flag = "AutoQuestLv1100", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1100 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1300",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1300", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1300 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1350",
+   CurrentValue = false,
+   Flag = "AutoQuestLv1350", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1350 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1400",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1400", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1400 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1450",
+   CurrentValue = false,
+   Flag = "AutoQuestLv1450", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1450 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1500",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1500", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1500 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1550",
+   CurrentValue = false,
+   Flag = "AutoQuestLv1550", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1550 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1600",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel650", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1600 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1650",
+   CurrentValue = false,
+   Flag = "AutoQuestLv1650", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1650 = Value
+   end,
+})
+
+local Tab = Window:CreateTab("Quest (Sea 2)", 11446859498) -- Title, Image
+
+local Section = Tab:CreateSection("Quest (Sea 2)")
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1700",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1700", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1700 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1750",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1750", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1750 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1800",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1800", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1800 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1850",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1850", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1850 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1900",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1900", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1900 = Value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Quest Level 1950",
+   CurrentValue = false,
+   Flag = "AutoQuestLevel1950", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   AutoQuestLevel1950 = Value
+   end,
+})
+
+local Tab = Window:CreateTab("Teleport", 9606628205) -- Title, Image
+
+local Section = Tab:CreateSection("Teleport (Sea 1)",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
+
+
+local Dropdown = Tab:CreateDropdown({
+   Name = "Select Island To Teleport",
+   Options = {"Start Island","Sand Island","Roshi Island","Snow Island","Pink Island","NameK Island","IDK Island","DontKnowThisIsland","Sky Island","Sky2 Island","Magma Island","Broly Island","Snuw Island","Secret House","Zamasu Island","Boss Broly Island","Sea Beast Island","3 Sword Island"},
+   CurrentOption = {""},
+   MultipleOptions = false,
+   Flag = "SelectIslandToTeleport", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(a)
     if a == "Start Island" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(288.5455017089844, 63.84864807128906, 115.04229736328125)
     elseif a == "Sand Island" then
@@ -586,9 +1047,16 @@ page1_4:Dropdown("Select Island To Teleport",{"Start Island","Sand Island","Rosh
     elseif a =="3 Sword Island" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-952.4598999023438, 74.61917114257812, -3595.201904296875)
     end
-end)
+   end,
+})
 
-page1_4:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden Sword NPC","Black Leg NPC","Speed Nimbus NPC","Random Race NPC","Dark Blade Awake NPC","Diamond Sword NPC","Flower Sword NPC","Soul Scythe Sword Npc","Dragon Ball NPC","Reset Fruit NPC","Race V2 NPC","Electro NPC","Dragon Combat NPC","Dark Sword NPC","Devil Fruit NPC","? NPC","Flame Sword NPC","Legendary Combat NPC","Awakening Fruit NPC","Mini Blade NPC","Lucky Random NPC (Ruby)"},nil,function(a)
+local Dropdown = Tab:CreateDropdown({
+   Name = "Select NPC To Teleport",
+   Options = {"Combat NPC","Dark Blade NPC","Wooden Sword NPC","Black Leg NPC","Speed Nimbus NPC","Random Race NPC","Dark Blade Awake NPC","Diamond Sword NPC","Flower Sword NPC","Soul Scythe Sword Npc","Dragon Ball NPC","Reset Fruit NPC","Race V2 NPC","Electro NPC","Dragon Combat NPC","Dark Sword NPC","Devil Fruit NPC","? NPC","Flame Sword NPC","Legendary Combat NPC","Awakening Fruit NPC","Mini Blade NPC","Lucky Random NPC (Ruby)"},
+   CurrentOption = "" or {"",""},
+   MultiSelection = false, -- If MultiSelections is allowed
+   Flag = "SelectNPCToTelport", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(a)
     if a == "Combat NPC" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(324.491699, 95.0442429, 640.770386, -1, 0, 0, 0, 1, 0, 0, 0, -1)
     elseif a == "Dark Blade NPC" then
@@ -636,43 +1104,67 @@ page1_4:Dropdown("Select NPC To Teleport",{"Combat NPC","Dark Blade NPC","Wooden
     elseif a =="Soul Scythe Sword Npc" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3673.686767578125, 80.19754791259766, 1334.6556396484375)
     end
-end)
+   end,
+})
 
-local page1_4 = tab4:CraftPage('Teleport (Sea 2)',2)
+local Section = Tab:CreateSection("Teleport (Sea 2)",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
 
-page1_4:Dropdown("Select Island To Teleport",{"Start Island","Chirstmas Island",},nil,function(a)
+local Dropdown = Tab:CreateDropdown({
+   Name = "Select Island To Teleport",
+   Options = {"Start Island","Chirstmas Island"},
+   CurrentOption = "" or {"",""},
+   MultiSelection = false, -- If MultiSelections is allowed
+   Flag = "SelectIslandToTeleportSea2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(a)
     if a == "Start Island" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(535.3236694335938, 249.785888671875, 458.905517578125)
     elseif a == "Chirstmas Island" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(3895.69384765625, 195.41709899902344, 1836.4102783203125)
     end
-end)
+   end,
+})
 
-local page1_5 = tab4:CraftPage('Sea',1)
+local Dropdown = Tab:CreateDropdown({
+   Name = "Select NPC To Teleport (Coming Soon)",
+   Options = {"",""},
+   CurrentOption = "" or {"",""},
+   MultiSelection = false, -- If MultiSelections is allowed
+   Flag = "SelectNPCToTeleportSea2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(a)
+   -- The function that takes place when the selected option is changed
+   -- The variable (Option) is a string for the value that the dropdown was changed to
+   end,
+})
 
-page1_5:Button('Teleport Place Sea 2',function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(751.607421875, 65.19896697998047, 170.67616271972656)
-end)
+local Tab = Window:CreateTab("Raid", 14477598542) -- Title, Image
 
+local Section = Tab:CreateSection("Raid",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
 
-page1_4:Dropdown("Select NPC To Teleport (Coming Soon)",{"",},nil,function(a)
-    
-    
-end)
+local Toggle = Tab:CreateToggle({
+   Name = "Killaura Raid",
+   CurrentValue = false,
+   Flag = "KillauraRaid", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   KillauraRaid = value
+   end,
+})
 
-local page1_4 = tab5:CraftPage('Raid (Sea 1)',1)
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Raid",
+   CurrentValue = false,
+   Flag = "AutoRaid", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   CC = value
+   end,
+})
 
-page1_4:Toggle('Killaura Raid (Stop Wave 5)',false,function(value)
-    KillauraRaid =  value
-end)
-
-page1_4:Toggle('Auto Raid',false,function(value)
-    CC = value
-end)
-
-page1_4:Button('Teleport to Raid',function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2299.685791015625, 1035.02490234375, -2715.144775390625)
-end)
+local Button = Tab:CreateButton({
+   Name = "Teleport to Raid",
+   Interact = 'Click',
+   Callback = function()
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2299.685791015625, 1035.02490234375, -2715.144775390625)
+   end,
+})
 
 function fixQuest()
     if game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestTake") then
@@ -841,6 +1333,17 @@ spawn(function()
     end
 end)
 
+spawn(function()
+while wait() do
+if AntiAFK then
+pcall(function()
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+end
+end)
+end
+end
+end)
 
 spawn(function()
 while wait(0.1) do
@@ -1268,7 +1771,18 @@ spawn(function()
 end)
 
 spawn(function()
-    while wait() do
+while wait() do
+if AutoEquipWeapon then
+pcall(function()
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Weapon))
+end)
+end
+end
+end)
+
+
+spawn(function()
+    while wait(0.01) do
         if Melee then
             pcall(function()
                 local args = {
@@ -1282,7 +1796,7 @@ spawn(function()
 end)
 
 spawn(function()
-    while wait() do
+    while wait(0.01) do
         if Defense then
             pcall(function()
                 local args = {
@@ -1296,7 +1810,7 @@ spawn(function()
 end)
 
 spawn(function()
-    while wait() do
+    while wait(0.01) do
         if Sword then
             pcall(function()
                 local args = {
@@ -1310,7 +1824,7 @@ spawn(function()
 end)
 
 spawn(function()
-    while wait() do
+    while wait(0.01) do
         if DevilFruit then
             pcall(function()
                 local args = {
