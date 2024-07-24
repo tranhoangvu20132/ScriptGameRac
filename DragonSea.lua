@@ -1136,6 +1136,16 @@ local Dropdown = Tab:CreateDropdown({
    end,
 })
 
+local Section = Tab:CreateSection("Sea",true)
+
+local Button = Tab:CreateButton({
+   Name = "Teleport to Place Sea 2",
+   Interact = 'Click',
+   Callback = function()
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  CFrame.new(751.607421875, 65.19896697998047, 170.67616271972656)
+   end,
+})
+
 local Tab = Window:CreateTab("Raid", 14477598542) -- Title, Image
 
 local Section = Tab:CreateSection("Raid",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
