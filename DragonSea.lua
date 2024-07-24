@@ -1334,7 +1334,7 @@ spawn(function()
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-68.81217956542969, 138.3164520263672, 40.44826889038086)
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
                             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
-                            game:GetService("Players").LocalPlayer.Character.Humanoid:SetStateEnabled(11)
+                            game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
                         end
                     end)
                 end)
