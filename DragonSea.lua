@@ -13,7 +13,7 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Lighting = game:GetService("Lighting")
 local OriginalWalkspeed = LocalPlayer.Character.Humanoid.WalkSpeed
 local OriginalJumpPower = LocalPlayer.Character.Humanoid.JumpPower
-local ModifiedWalkspeed = 15
+local ModifiedWalkspeed = 50
 local ModifiedJumpPower = 100
 
 local function Noclip(State)
