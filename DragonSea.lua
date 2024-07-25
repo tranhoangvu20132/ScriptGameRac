@@ -1237,7 +1237,7 @@ spawn(function()
                                             else
                                                 Click()   
                                             end
-                                            TP(x.HumanoidRootPart.CFrame * CFrame.new(0,9 ,DistanceMob))
+                                            TP(x.HumanoidRootPart.CFrame * CFrame.new(0,9,DistanceMob))
                                         until x:FindFirstChild("Humanoid").Health <= 0 or not Farm or not x.Parent or game:GetService("Players").LocalPlayer.Quest.Num.Value == 0
                                     end
                                 else
