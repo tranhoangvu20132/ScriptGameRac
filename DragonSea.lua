@@ -13,7 +13,7 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Lighting = game:GetService("Lighting")
 local OriginalWalkspeed = LocalPlayer.Character.Humanoid.WalkSpeed
 local OriginalJumpPower = LocalPlayer.Character.Humanoid.JumpPower
-local ModifiedWalkspeed = 50
+local ModifiedWalkspeed = 15
 local ModifiedJumpPower = 100
 
 local function Noclip(State)
@@ -1000,7 +1000,7 @@ local Toggle = Tab:CreateToggle({
 
 local Tab = Window:CreateTab("Teleport", 9606628205) -- Title, Image
 
-local Section = Tab:CreateSection("Teleport (Sea 1)",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
+local Section = Tab:CreateSection("Teleport (Sea 1)") -- The 2nd argument is to tell if its only a Title and doesnt contain element
 
 
 local Dropdown = Tab:CreateDropdown({
@@ -1107,7 +1107,7 @@ local Dropdown = Tab:CreateDropdown({
    end,
 })
 
-local Section = Tab:CreateSection("Teleport (Sea 2)",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
+local Section = Tab:CreateSection("Teleport (Sea 2)") -- The 2nd argument is to tell if its only a Title and doesnt contain element
 
 local Dropdown = Tab:CreateDropdown({
    Name = "Select Island To Teleport",
@@ -1136,7 +1136,7 @@ local Dropdown = Tab:CreateDropdown({
    end,
 })
 
-local Section = Tab:CreateSection("Sea",true)
+local Section = Tab:CreateSection("Sea")
 
 local Button = Tab:CreateButton({
    Name = "Teleport to Place Sea 2",
@@ -1148,7 +1148,7 @@ local Button = Tab:CreateButton({
 
 local Tab = Window:CreateTab("Raid", 14477598542) -- Title, Image
 
-local Section = Tab:CreateSection("Raid",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
+local Section = Tab:CreateSection("Raid") -- The 2nd argument is to tell if its only a Title and doesnt contain element
 
 local Toggle = Tab:CreateToggle({
    Name = "Killaura Raid",
@@ -1334,7 +1334,7 @@ spawn(function()
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-68.81217956542969, 138.3164520263672, 40.44826889038086)
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
                             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
-                            game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+                            game:GetService("Players").LocalPlayer.Character.Humanoid:SetStateEnabled(11)
                         end
                     end)
                 end)
