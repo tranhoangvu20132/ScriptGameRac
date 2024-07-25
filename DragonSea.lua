@@ -573,9 +573,9 @@ local Section = Tab:CreateSection("Player")
 local Slider = Tab:CreateSlider({
    Name = "Walk Speed",
    Range = {0, 500},
-   Increment = 15,
+   Increment = 50,
    Suffix = "Speed",
-   CurrentValue = 15,
+   CurrentValue = 50,
    Flag = "WalkSpeed", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
    ModifiedWalkspeed = Value
@@ -646,7 +646,7 @@ local Toggle = Tab:CreateToggle({
 local Button = Tab:CreateButton({
    Name = "Anti AFK",
    Callback = function()
-   local VirtualUser = game:GetService("VirtualUser")
+    	local VirtualUser = game:GetService("VirtualUser")
     local character = game.Players.LocalPlayer.Character
 
     game.Players.LocalPlayer.Idled:Connect(function()
