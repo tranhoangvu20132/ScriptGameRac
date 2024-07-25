@@ -1739,7 +1739,7 @@ spawn(function()
             if game.workspace:FindFirstChild("Npc") then
                 check = game.Workspace.Npc
             end
-            wait(0.01)
+            wait()
             for i,v in pairs(check:GetChildren()) do
                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 400 then
                     pcall(function()
