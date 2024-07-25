@@ -340,12 +340,11 @@ ArrayField:Notify({
       Ignore = {
          Name = "Ok",
          Callback = function()
-         
+
       end
    },
  },
 })
-
 
 
 
@@ -445,6 +444,16 @@ local Toggle = Tab:CreateToggle({
    AutoEquipWeapon = value
    end,
 })
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto UnEquip Weapon",
+   CurrentValue = false,
+   Flag = "AutoUnEquipWeapon", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   AutoUnEquipWeapon = value
+   end,
+})
+
 
 local Tab = Window:CreateTab("Misc", 9613645002) -- Title, Image
 
@@ -646,7 +655,7 @@ local Toggle = Tab:CreateToggle({
 local Button = Tab:CreateButton({
    Name = "Anti AFK",
    Callback = function()
-    	local VirtualUser = game:GetService("VirtualUser")
+    local VirtualUser = game:GetService("VirtualUser")
     local character = game.Players.LocalPlayer.Character
 
     game.Players.LocalPlayer.Idled:Connect(function()
@@ -1334,25 +1343,13 @@ spawn(function()
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-68.81217956542969, 138.3164520263672, 40.44826889038086)
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
                             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
-                            game:GetService("Players").LocalPlayer.Character.Humanoid:SetStateEnabled(11)
+                            game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
                         end
                     end)
                 end)
             end)
         end
     end
-end)
-
-spawn(function()
-while wait() do
-if AntiAFK then
-pcall(function()
-for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
-    v:Disable()
-end
-end)
-end
-end
 end)
 
 spawn(function()
@@ -1790,6 +1787,16 @@ end
 end
 end)
 
+
+spawn(function()
+while wait() do
+if AutoUnEquipWeapon then
+pcall(function()
+game.Players.LocalPlayer.Character.Humanoid:UnequipTools(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Weapon))
+end)
+end
+end
+end)
 
 spawn(function()
     while wait(0.01) do
