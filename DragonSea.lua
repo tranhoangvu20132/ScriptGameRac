@@ -1151,7 +1151,7 @@ local Tab = Window:CreateTab("Raid", 14477598542) -- Title, Image
 local Section = Tab:CreateSection("Raid") -- The 2nd argument is to tell if its only a Title and doesnt contain element
 
 local Toggle = Tab:CreateToggle({
-   Name = "Killaura Raid",
+   Name = "Killaura Raid (Stop Wave 5)",
    CurrentValue = false,
    Flag = "KillauraRaid", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(value)
