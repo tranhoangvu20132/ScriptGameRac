@@ -333,7 +333,7 @@ local Window = ArrayField:CreateWindow({
 
 ArrayField:Notify({
    Title = "Script",
-   Content = "The Script Has Been Load Succesfully",
+   Content = "The Script Has Been Load Succesfully!",
    Duration = 5,
    Image = 7040391851,
    Actions = { -- Notification Buttons
