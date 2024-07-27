@@ -388,6 +388,15 @@ local Toggle = Tab:CreateToggle({
    CurrentValue = false,
    Flag = "FastAttack", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(value)
+   CBLRaid2 = value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Super Fast Attack",
+   CurrentValue = false,
+   Flag = "SuperFastAttack", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
    CBLRaid = value
    end,
 })
@@ -405,7 +414,7 @@ local Toggle = Tab:CreateToggle({
 
 local Dropdown = Tab:CreateDropdown({
    Name = "Select Method Farm",
-   Options = {"Normal","Fast"},
+   Options = {"Normal","Fast","Super Fast"},
    CurrentOption = {"Normal"},
    MultipleOptions = false,
    Flag = "SelectMethodFarm", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
@@ -1290,6 +1299,8 @@ spawn(function()
                                                 Click()
                                             elseif Method == "Fast" then
                                                 Fast = true
+                                            elseif Method == "Super Fast" then
+                                                SuperFast = true
                                             else
                                                 Click()   
                                             end
@@ -1305,6 +1316,8 @@ spawn(function()
                                                     Click()
                                                 elseif Method == "Fast" then
                                                     Fast = true
+                                                elseif Method == "Super Fast" then
+                                                    SuperFast = true
                                                 else
                                                     Click()
                                                 end
@@ -1322,6 +1335,8 @@ spawn(function()
                                                 Click()
                                             elseif Method == "Fast" then
                                                 Fast = true
+                                            elseif Method == "Super Fast" then
+                                                SuperFast = true
                                             else
                                                 Click()  
                                             end
@@ -1363,8 +1378,8 @@ spawn(function()
     end
 end)
 spawn(function()
-    while wait() do
-        if CBLRaid or Fast then
+    while wait(0.01) do
+        if CBLRaid or SuperFast then
             pcall(function()
                 local args = {
                     [1] = 1,
@@ -1388,7 +1403,7 @@ end)
 
 spawn(function()
     while wait(1) do
-        if CBLRaidThuHai or Fast then
+        if CBLRaid2 or Fast then
             pcall(function()
                 local args = {
                     [1] = 1,
