@@ -13,8 +13,12 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Lighting = game:GetService("Lighting")
 local OriginalWalkspeed = LocalPlayer.Character.Humanoid.WalkSpeed
 local OriginalJumpPower = LocalPlayer.Character.Humanoid.JumpPower
+local OriginalJumpHeight = LocalPlayer.Character.Humanoid.JumpHeight
+local OriginalLowGravity = game.Workspace.Gravity
 local ModifiedWalkspeed = 50
 local ModifiedJumpPower = 100
+local ModifiedJumpHeight = 100
+local ModifiedLowGravity = 50
 
 local function Noclip(State)
 		LocalPlayer.Character.HumanoidRootPart.CanCollide = State
@@ -362,6 +366,15 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Toggle = Tab:CreateToggle({
+   Name = "Killaura Zamasu",
+   CurrentValue = false,
+   Flag = "KillauraZamasu", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   KillauraZamasu = value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
    Name = "Auto Farm Level",
    CurrentValue = false,
    Flag = "AutoFarmLevel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
@@ -603,6 +616,30 @@ local Slider = Tab:CreateSlider({
    end,
 })
 
+local Slider = Tab:CreateSlider({
+   Name = "Jump Height",
+   Range = {0, 500},
+   Increment = 100,
+   Suffix = "Jump",
+   CurrentValue = 100,
+   Flag = "JumpHeight", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   ModifiedJumpHeight = Value
+   end,
+})
+
+local Slider = Tab:CreateSlider({
+   Name = "Low Gravity",
+   Range = {0, 100},
+   Increment = 50,
+   Suffix = "Gravity",
+   CurrentValue = 50,
+   Flag = "LowGravity", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   ModifiedLowGravity = Value
+   end,
+})
+
 local Toggle = Tab:CreateToggle({
    Name = "Enable Walk Speed",
    CurrentValue = false,
@@ -628,6 +665,34 @@ local Toggle = Tab:CreateToggle({
 				LocalPlayer.Character.Humanoid.UseJumpPower = Value
 			else
 				LocalPlayer.Character.Humanoid.JumpPower = OriginalJumpPower
+			end
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Enable Jump Height",
+   CurrentValue = false,
+   Flag = "EnableJumpHeight", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   if Value == true then
+				OriginalJumpHeight = LocalPlayer.Character.Humanoid.JumpHeight
+				LocalPlayer.Character.Humanoid.JumpHeight = ModifiedJumpHeight
+			else
+				LocalPlayer.Character.Humanoid.JumpHeight = OriginalJumpHeight
+			end
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Enable Low Gravity",
+   CurrentValue = false,
+   Flag = "EnableLowGravity", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   if Value == true then
+				OriginalJumpHeight = game.Workspace.Gravity
+				game.Workspace.Gravity = ModifiedLowGravity
+			else
+				game.Workspace.Gravity = OriginalLowGravity
 			end
    end,
 })
@@ -838,15 +903,6 @@ local Toggle = Tab:CreateToggle({
    Flag = "AutoQuestLv900", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
    AutoQuestLevel900 = Value
-   end,
-})
-
-local Toggle = Tab:CreateToggle({
-   Name = "Auto Quest Level 950",
-   CurrentValue = false,
-   Flag = "AutoQuestLevel950", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   AutoQuestLevel950 = Value
    end,
 })
 
@@ -1330,8 +1386,29 @@ spawn(function()
     end
 end)
 
-
-
+spawn(function()
+    while wait(1) do
+        if CBLRaidThuHai or Fast then
+            pcall(function()
+                local args = {
+                    [1] = 1,
+                    [2] = game:GetService("Players").LocalPlayer
+                }
+                if game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("HackerSo1TheGioi") then
+                    game:GetService("Players").LocalPlayer.Character[Vtool].HackerSo1TheGioi.RemoteEvent:FireServer(unpack(args))
+                elseif game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("Attack") then
+                    game:GetService("Players").LocalPlayer.Character[Vtool].Attack.RemoteEvent:FireServer(unpack(args))
+                elseif game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("UaAloLaSaoZ") then
+                    game:GetService("Players").LocalPlayer.Character[Vtool].UaAloLaSaoZ.RemoteEvent:FireServer(unpack(args))
+                elseif game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("DungCoHackNua") then
+                    game:GetService("Players").LocalPlayer.Character[Vtool].DungCoHackNua.RemoteEvent:FireServer(unpack(args))
+                elseif game:GetService("Players").LocalPlayer.Character[Vtool]:FindFirstChild("XaiLaBiBanAcc") then
+                    game:GetService("Players").LocalPlayer.Character[Vtool].XaiLaBiBanAcc.RemoteEvent:FireServer(unpack(args))
+                end
+            end) 
+        end
+    end
+end)
 
 spawn(function()
     while wait() do
@@ -1549,16 +1626,6 @@ end)
 
 spawn(function()
 while wait(0.1) do
-if AutoQuestLevel950 then
-pcall(function()
-workspace.QuestFolder.Lv950Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
-end)
-end
-end
-end)
-
-spawn(function()
-while wait(0.1) do
 if AutoQuestLevel1000 then
 pcall(function()
 workspace.QuestFolder.Lv1000Quest.ClickPart.QuestTake.QuestTake.Accept.RemoteEvent:FireServer()
@@ -1732,7 +1799,6 @@ end
 end
 end)
 
-
 spawn(function()
     while wait() do
         if Killaura then
@@ -1759,6 +1825,26 @@ end)
 
 spawn(function()
     while wait() do
+        if KillauraZamasu then
+            for i,v in pairs(game.Workspace.FusedZamasu:GetDescendants()) do
+                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 400 then
+                    pcall(function()
+                        repeat wait()
+                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                            v.Humanoid.Health = 0
+                            v.HumanoidRootPart.CanCollide = false
+                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                            v.HumanoidRootPart.Transparency = 0.8
+                        until not KillauraZamasu or not v.Parent or v.Humanoid.Health <= 1
+                    end)
+                end
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
         if KillauraRaid then
             for i,v in pairs(game.Workspace.SpawnEnemy:GetDescendants()) do
                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 400 then
@@ -1776,6 +1862,7 @@ spawn(function()
         end
     end
 end)
+
 
 spawn(function()
 while wait() do
