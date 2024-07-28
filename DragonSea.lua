@@ -727,6 +727,13 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Button = Tab:CreateButton({
+   Name = "God Mode Script",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))()
+   end,
+})
+
+local Button = Tab:CreateButton({
    Name = "Anti AFK",
    Callback = function()
     local VirtualUser = game:GetService("VirtualUser")
@@ -1241,6 +1248,14 @@ local Toggle = Tab:CreateToggle({
    CC = value
    end,
 })
+
+local Button = Tab:CreateButton({
+   Name = "God Mode",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))()
+   end,
+})
+
 
 local Button = Tab:CreateButton({
    Name = "Teleport to Raid",
