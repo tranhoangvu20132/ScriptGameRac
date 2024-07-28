@@ -727,7 +727,7 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Button = Tab:CreateButton({
-   Name = "God Mode Script",
+   Name = "God Mode",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))()
    end,
