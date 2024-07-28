@@ -1258,7 +1258,7 @@ local Button = Tab:CreateButton({
 
 
 local Button = Tab:CreateButton({
-   Name = "Teleport to Raid",
+   Name = "Teleport to Raid (Please Turn Off God Mode To Use It)",
    Interact = 'Click',
    Callback = function()
    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2299.685791015625, 1035.02490234375, -2715.144775390625)
