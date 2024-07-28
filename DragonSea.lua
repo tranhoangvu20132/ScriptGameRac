@@ -716,7 +716,7 @@ local Toggle = Tab:CreateToggle({
 				spawn(function()
 					while Noclipping == true do
 						Noclip(false)
-						task.wait()
+						task.wait(0.01)
 					end
 				end)
 			end
