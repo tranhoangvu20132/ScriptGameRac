@@ -1241,7 +1241,7 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Toggle = Tab:CreateToggle({
-   Name = "Auto Raid",
+   Name = "Auto Raid (Use God Mode)",
    CurrentValue = false,
    Flag = "AutoRaid", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(value)
