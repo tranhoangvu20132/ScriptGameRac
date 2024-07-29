@@ -1902,7 +1902,6 @@ spawn(function()
         if AutoFarmZamasu then
             for i,v in pairs(game.Workspace.FusedZamasu:GetDescendants()) do
                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 400 then
-                  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 9)
                     pcall(function()
                         repeat wait()
                             sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
@@ -1910,6 +1909,7 @@ spawn(function()
                             v.HumanoidRootPart.CanCollide = false
                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                             v.HumanoidRootPart.Transparency = 0.8
+			    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 9)
                         until not AutoFarmZamasu or not v.Parent or v.Humanoid.Health <= 1
                     end)
                 end
