@@ -1905,7 +1905,7 @@ spawn(function()
                     pcall(function()
                         repeat wait()
                             sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                            v.Humanoid.Health = 0
+                            v.Humanoid.Health = 1000000
                             v.HumanoidRootPart.CanCollide = false
                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                             v.HumanoidRootPart.Transparency = 0.8
