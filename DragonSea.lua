@@ -366,20 +366,30 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Toggle = Tab:CreateToggle({
-   Name = "Killaura Zamasu",
-   CurrentValue = false,
-   Flag = "KillauraZamasu", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(value)
-   KillauraZamasu = value
-   end,
-})
-
-local Toggle = Tab:CreateToggle({
    Name = "Auto Farm Level",
    CurrentValue = false,
    Flag = "AutoFarmLevel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(value)
    Farm = value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Farm Mob And Boss",
+   CurrentValue = false,
+   Flag = "AutoFarmMobAndBoss", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   AutoFarmMobAndBoss = value
+   end,
+})
+
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Farm Zamasu",
+   CurrentValue = false,
+   Flag = "AutoFarmZamasu", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   AutoFarmZamasu = value
    end,
 })
 
@@ -1241,7 +1251,16 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Toggle = Tab:CreateToggle({
-   Name = "Auto Raid (Use God Mode)",
+   Name = "Auto Farm Raid",
+   CurrentValue = false,
+   Flag = "AutoFarmRaid", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(value)
+   AutoFarmRaid = value
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Raid (Use God Mode) (Support Any Executor Not Have Support Full Script)",
    CurrentValue = false,
    Flag = "AutoRaid", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(value)
@@ -1258,7 +1277,7 @@ local Button = Tab:CreateButton({
 
 
 local Button = Tab:CreateButton({
-   Name = "Teleport to Raid (Please Turn Off God Mode To Use It)",
+   Name = "Teleport to Raid",
    Interact = 'Click',
    Callback = function()
    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2299.685791015625, 1035.02490234375, -2715.144775390625)
@@ -1855,7 +1874,32 @@ end)
 
 spawn(function()
     while wait() do
-        if KillauraZamasu then
+        if AutoFarmMobAndBoss then
+            if game.workspace:FindFirstChild("Npc") then
+                check = game.Workspace.Npc
+            end
+            wait()
+            for i,v in pairs(check:GetChildren()) do
+                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 400 then
+                    pcall(function()
+                        repeat wait()
+                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                            v.Humanoid.Health = 1000000
+                            v.HumanoidRootPart.CanCollide = false
+                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                            v.HumanoidRootPart.Transparency = 0.8
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 9)
+                        until not AutoFarmMob or not v.Parent or v.Humanoid.Health <= 1
+                    end)
+                end
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if AutoFarmZamasu then
             for i,v in pairs(game.Workspace.FusedZamasu:GetDescendants()) do
                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 400 then
                     pcall(function()
@@ -1865,7 +1909,29 @@ spawn(function()
                             v.HumanoidRootPart.CanCollide = false
                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                             v.HumanoidRootPart.Transparency = 0.8
-                        until not KillauraZamasu or not v.Parent or v.Humanoid.Health <= 1
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 9)
+                        until not AutoFarmZamasu or not v.Parent or v.Humanoid.Health <= 1
+                    end)
+                end
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if AutoFarmRaid then
+            for i,v in pairs(game.Workspace.SpawnEnemy:GetDescendants()) do
+                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 400 then
+                    pcall(function()
+                        repeat wait()
+                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                            v.Humanoid.Health = 1000000
+                            v.HumanoidRootPart.CanCollide = false
+                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                            v.HumanoidRootPart.Transparency = 0.8
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 9)
+                        until not AutoFarmRaid or not v.Parent or v.Humanoid.Health <= 1
                     end)
                 end
             end
